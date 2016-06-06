@@ -1,0 +1,94 @@
+body {
+        padding-top: 80px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+#logo-center {
+	width: 42%;
+	margin-bottom: 5px;
+}
+.enter {
+  margin-top: 20px !important;
+}
+/* Adding a second color related to the visual identity*/
+.panel-secondary {
+  border-color: #46857D;
+}
+.panel-secondary > .panel-heading {
+  color: #fff;
+  background-color: #46857D;
+  border-color: #46857D;
+}
+.panel-secondary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #46857D;
+}
+.panel-secondary > .panel-heading .badge {
+  color: #46857D;
+  background-color: #fff;
+}
+.panel-secondary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #46857D;
+}
+.btn-secondary {
+  color: #fff;
+  background-color: #46857D;
+  border-color: #417D76;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary.focus,
+.btn-secondary:active,
+.btn-secondary.active,
+.open > .dropdown-toggle.btn-secondary {
+  color: #fff;
+  background-color: #417D76;
+  border-color: #46857D;
+}
+.btn-secondary:active,
+.btn-secondary.active,
+.open > .dropdown-toggle.btn-secondary {
+  background-image: none;
+}
+.btn-secondary.disabled,
+.btn-secondary[disabled],
+fieldset[disabled] .btn-secondary,
+.btn-secondary.disabled:hover,
+.btn-secondary[disabled]:hover,
+fieldset[disabled] .btn-secondary:hover,
+.btn-secondary.disabled:focus,
+.btn-secondary[disabled]:focus,
+fieldset[disabled] .btn-secondary:focus,
+.btn-secondary.disabled.focus,
+.btn-secondary[disabled].focus,
+fieldset[disabled] .btn-secondary.focus,
+.btn-secondary.disabled:active,
+.btn-secondary[disabled]:active,
+fieldset[disabled] .btn-secondary:active,
+.btn-secondary.disabled.active,
+.btn-secondary[disabled].active,
+fieldset[disabled] .btn-secondary.active {
+  background-color: #46857D;
+  border-color: #437E77;
+}
+.btn-secondary .badge {
+  color: #46857D;
+  background-color: #fff;
+}
+
+/* Changing the angular-slider color*/
+.ngrs-range-slider .ngrs-join {
+  background-color: #25514C !important;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #52C4B6), color-stop(100%, #25514C)) !important;
+  background-image: -webkit-linear-gradient(#52C4B6, #25514C) !important;
+  background-image: -moz-linear-gradient(#52C4B6, #25514C) !important;
+  background-image: -o-linear-gradient(#52C4B6, #25514C) !important;
+  background-image: linear-gradient(#52C4B6, #25514C) !important;
+}
+
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 30px;
+}
+footer p {
+  border-top: 1px solid #d7e0e2;
+}

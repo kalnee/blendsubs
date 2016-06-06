@@ -1,0 +1,34 @@
+extends ../includes/layout
+
+block main-content
+	nav(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+		.container
+			.navbar-header
+				button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
+					span.sr-only
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a(class="navbar-brand" href="#")
+					img(src="/assets/img/logo/logo-white-large.png" alt="logo" weight="120" height="20")
+			div(id="navbar" class="collapse navbar-collapse")
+				ul.nav.navbar-nav
+					li.active
+						a(href="#") Home
+					li
+						a(href="#") About
+					li
+						a(href="#") Contact
+	
+	.row
+		.col-lg-12.text-center
+			img(src="/assets/img/logo/logo-full-large.png" alt="logo" id="logo-center")
+			p.lead Mix subtitles to practice a foreign language while having fun!
+	
+	.container
+		div(ng-view)
+
+	footer
+		div.container
+			p.text-muted.text-center &copy; 2014 BlendSubs.com
+

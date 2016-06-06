@@ -1,0 +1,5 @@
+# Ignore node_modules created by npm, but not more deeply-nested node_modules
+/node_modules
+/public/vendor/*
+#ignore vim temporary files
+*~

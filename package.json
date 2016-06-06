@@ -1,0 +1,43 @@
+{
+  "name": "blend-subs",
+  "version": "0.0.0",
+  "description": "A web-based tool to merge two different subtitles in different languages.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "node_modules/bower/bin/bower install"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danielfc/blend-subs.git"
+  },
+  "keywords": [
+    "mean",
+    "blend",
+    "blend-subs",
+    "subtitles",
+    "subtitle",
+    "merge",
+    "languages"
+  ],
+  "author": "danielfc/joaocar",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/danielfc/blend-subs/issues"
+  },
+  "dependencies": {
+    "express": "~4.4.5",
+    "jade": "~1.3.1",
+    "morgan": "~1.1.1",
+    "body-parser": "~1.4.3",
+    "imdb-api": "^1.3.3",
+    "xmlrpc": "^1.2.0",
+    "request": "^2.47.0",
+    "amdefine": "^0.1.0",
+    "bower": "~1.3.9"
+  }
+}
