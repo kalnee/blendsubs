@@ -1,8 +1,10 @@
-var fs = require('fs');
-var threshold = '0.2';
+var fs = require('fs'),
+    wordObfuscation = require('./replacement/word-obfuscation'),
+    wordTranslation = require('./replacement/word-translation');
 
-var file = 'samples/the-walking-dead_pt-br.srt',
-    destination = 'samples/obfuscated.srt';
+var file = 'samples/simple-subtitle.str',
+    destination = 'samples/translated.srt',
+    threshold = '0.2';
 
 console.log('Reading str file: ' + file);
 fs.readFile(file, 'utf8', function(err, text) {
@@ -26,7 +28,7 @@ fs.readFile(file, 'utf8', function(err, text) {
 
       if (Math.random() < threshold) {
         changedWords.push(words[j]);
-        words[j] = words[j].replace(/[a-z\u00E0-\u00FC]/g, '_');
+        words[j] = wordTranslation(words[j]);
       }
     }
 
