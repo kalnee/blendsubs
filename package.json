@@ -38,6 +38,7 @@
     "xmlrpc": "^1.2.0",
     "request": "^2.47.0",
     "amdefine": "^0.1.0",
-    "bower": "~1.7.9"
+    "bower": "~1.7.9",
+    "iconv-lite": "~0.4.13"
   }
 }

@@ -1,25 +1,25 @@
 1
-00:00:00,000 --> 00:00:03,426
+00:00:37,872 --> 00:00:40,872
 Com licença amigo, tudo bem?
 A cidade de Belo Horizonte está muito longe?
 
 2
-00:00:03,427 --> 00:00:04,928
+00:00:40,873 --> 00:00:43,873
 Nem tanto, amigo.
 Pegue a primeira rodovia que aparecer quando você passar de Contagem.
 
 3
-00:00:05,240 --> 00:00:06,641
+00:00:43,874 --> 00:00:44,873
 O tempo tá bonito hoje, não está?
 
 4
-00:00:06,642 --> 00:00:09,194
-Muito!
+00:00:44,874 --> 00:00:45,873
+Muito! E o antibiótico que você estava tomando?
 
 5
-00:00:14,297 --> 00:00:15,698
+00:00:45,874 --> 00:00:46,873
 Vai lá, segue seu caminho.
 
 6
-00:00:15,699 --> 00:00:17,488
+00:00:46,874 --> 00:00:47,873
 Seguirei meu caminho, muito obrigado.

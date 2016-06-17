@@ -1,15 +1,17 @@
 var fs = require('fs'),
-    wordObfuscation = require('./replacement/word-obfuscation'),
-    wordTranslation = require('./replacement/word-translation');
+    iconv = require('iconv-lite'),
+    wordObfuscation = require('./modes/word-obfuscation'),
+    wordTranslation = require('./modes/word-translation');
 
-var file = 'samples/simple-subtitle.str',
+var file = 'samples/simple-subtitle.srt',
     destination = 'samples/translated.srt',
-    threshold = '0.2';
+    threshold = '0.5';
 
 console.log('Reading str file: ' + file);
-fs.readFile(file, 'utf8', function(err, text) {
+fs.readFile(file, 'binary', function(err, bytes) {
   if (err) throw err;
   console.log('Srt file read');
+  var text = iconv.decode(bytes, "ISO-8859-1");
 
   var lines = text.split('\n'),
       changedWords = [];
@@ -27,8 +29,11 @@ fs.readFile(file, 'utf8', function(err, text) {
       }
 
       if (Math.random() < threshold) {
-        changedWords.push(words[j]);
+        var wordBefore = words[j];
         words[j] = wordTranslation(words[j]);
+        if (wordBefore !== words[j]) {
+          changedWords.push(wordBefore);
+        }
       }
     }
 
@@ -42,7 +47,7 @@ fs.readFile(file, 'utf8', function(err, text) {
     console.log(i + ' - ' + w);
   });
   console.log('Salving in ' + destination);
-  fs.writeFile(destination, lines.join(''), function(err) {
+  fs.writeFile(destination, lines.join('\n'), function(err) {
     if (err) throw err;
     console.log("The file was saved!");
     console.log('=========================\n');
