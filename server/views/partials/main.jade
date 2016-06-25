@@ -1,5 +1,4 @@
 form(role="form")
-
 	.panel.panel-secondary.enter
 		.panel-heading
 			h3.panel-title Step 1: Search for the movie title
@@ -17,16 +16,41 @@ form(role="form")
 
 	.panel.panel-secondary(ng-hide="!subtitle.movie")
 		.panel-heading
-				h3.panel-title Step 2: Choose the languages for the subtitles
+				h3.panel-title Step 2: Choose the mode
+			.panel-body
+				.row
+					script.
+						$(function () {
+							$('[data-toggle="popover"]').popover({
+									animation: true,
+									trigger: 'hover'
+								});
+						});
+					.col-xs-6
+						.radio
+							label
+								input(type="radio" name="mode" id="obfuscation" ng-model="subtitle.mode" value="obfuscation")
+								| Obfuscation 
+								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Obfuscation Mode" data-content="In this mode, the words will be obfucated (e.g It's a beautiful ___ outside!).")
+					.col-xs-6
+						.radio
+							label 
+								input(type="radio" name="mode" id="translation" ng-model="subtitle.mode" value="translation")
+								| Translation 
+								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Translation Mode" data-content="In this mode, the most commom words will be translated (e.g It's a beautiful día outside!).")
+						
+	.panel.panel-secondary(ng-hide="!subtitle.mode")
+		.panel-heading
+				h3.panel-title Step 3: Choose the languages for the subtitles
 			.panel-body
 				.row
 					.col-xs-6
 						label Native language
 						div(bs-language-picker flags="true" blank="true" ng-model="subtitle.language")
-					.col-xs-6
+					.col-xs-6(ng-if="subtitle.mode == 'translation'")
 						label Foreign language
 						div(bs-language-picker flags="true" blank="true" ng-model="subtitle.foreignLanguage")
-
+		
 	.panel.panel-secondary(ng-hide="true || !movie && (!subtitle.language || !subtitle.foreignLanguage)")
 		.panel-heading
 				h3.panel-title Step 3: Choose how much of the foreign language to be merged

@@ -22,7 +22,8 @@
       movie: null,
       language: null,
       foreignLanguage: null,
-      percentual: 10
+      percentual: 10,
+      mode: null
     };
 
     $scope.getMovies = function(_query) {
