@@ -22,16 +22,10 @@ module.exports = function (app) {
 	});
 
 	app.post('/api/subtitle/merge', function (req, res) {
-		api.SearchSubtitles(req.body.movie, req.body.language, function (_subNative) {
-			api.SearchSubtitles(req.body.movie, req.body.foreignLanguage, function (_subForeign) {
-				api.DownloadSubtitles(_subNative, function () {
-					api.DownloadSubtitles(_subForeign, function () {
-						fs.readFile('/tmp/' + _subForeign.SubFileName, function (err, data) {
-							var base64data = new Buffer(data).toString('base64');
-							res.send(base64data);
-						});
-					});
-				});
+		api.DownloadAll(req.body, function (err, zipFile) {
+			res.download(zipFile, function (err) {
+				var fs = require('fs');
+				fs.unlink(zipFile);
 			});
 		});
 	});

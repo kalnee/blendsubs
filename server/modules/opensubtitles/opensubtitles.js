@@ -21,7 +21,6 @@ define(function () {
 
     function OpenSubtitles() {
 
-
     }
 
     OpenSubtitles.login = function (_callback) {
@@ -54,23 +53,25 @@ define(function () {
     };
 
     // Returns BASE64 encoded gzipped IDSubtitleFile(s). You need to BASE64 decode and ungzip 'data' to get its contents.
-    OpenSubtitles.DownloadSubtitles = function (_subtitle, _callback) {
+    OpenSubtitles.DownloadSubtitles = function (_folder, _subtitle, _callback) {
         function unzip(url, filename) {
             var output = fs.createWriteStream(filename);
 
             request({
-                url: url,
-                headers: {
-                    'Accept-Encoding': 'gzip'
-                }
-            }).on('response', function(response) {
-                _callback();
-              })
-              .pipe(zlib.createGunzip())
-              .pipe(output);
+                    url: url,
+                    headers: {
+                        'Accept-Encoding': 'gzip'
+                    }
+                }).on('response', function (response) {
+                    if (_callback) {
+                        _callback();
+                    }
+                })
+                .pipe(zlib.createGunzip())
+                .pipe(output);
         }
 
-        unzip(_subtitle.SubDownloadLink, '/tmp/' + _subtitle.SubFileName);
+        unzip(_subtitle.SubDownloadLink, _folder + '/' + _subtitle.SubFileName);
     };
 
     OpenSubtitles.SearchSubtitles = function (_imdbId, _lang, _callback) {
@@ -83,10 +84,10 @@ define(function () {
         if (!token) {
             OpenSubtitles.login(function () {
                 var params = [token, queries, {
-                    limit: 1
+                    limit: 50
                 }];
                 client.methodCall('SearchSubtitles', params, function (error, data) {
-                    _callback(data.data[0]);
+                    _callback(data.data);
                 });
             });
         } else {
@@ -94,62 +95,51 @@ define(function () {
                 limit: 1
             }];
             client.methodCall('SearchSubtitles', params, function (error, data) {
-                _callback(data.data[0]);
+                _callback(data.data);
             });
         }
-        
-        /*
-                Output:
+    };
 
+    OpenSubtitles.DownloadAll = function (_options, _callback) {
+        const path = require('path');
+        const os = require('os');
+        const async = require('async');
+        const archiver = require('archiver');
+        fs.mkdtemp(os.tmpdir() + path.sep + 'sub-', (err, folder) => {
+            if (err) throw err;
 
-                [data] => Array
-                    (
-                        [0] => Array
-                            (
-                                [MatchedBy] => moviehash
-                                [IDSubMovieFile] => 865
-                                [MovieHash] => d745cd88e9798509
-                                [MovieByteSize] => 734058496
-                                [MovieTimeMS] => 0
-                                [IDSubtitleFile] => 1118
-                                [SubFileName] => Al sur de Granada (SPA).srt
-                                [SubActualCD] => 1
-                                [SubSize] => 15019
-                                [SubHash] => 0cb51bf4a5266a9aee42a2d8c7ab6793
-                                [IDSubtitle] => 905
-                                [UserID] => 0
-                                [SubLanguageID] => spa
-                                [SubFormat] => srt
-                                [SubSumCD] => 1
-                                [SubAuthorComment] =>
-                                [SubAddDate] => 2005-06-15 20:05:35
-                                [SubBad] => 1
-                                [SubRating] => 4.5
-                                [SubDownloadsCnt] => 216
-                                [MovieReleaseName] => ss
-                                [IDMovie] => 11517
-                                [IDMovieImdb] => 349076
-                                [MovieName] => Al sur de Granada
-                                [MovieNameEng] => South from Granada
-                                [MovieYear] => 2003
-                                [MovieImdbRating] => 6.4
-                                [SubFeatured] => 0
-                                [UserNickName] =>
-                                [ISO639] => es
-                                [LanguageName] => Spanish
-                                [SubComments] => 1
-                                [SubHearingImpaired] => 0
-                                [UserRank] =>
-                                [SeriesSeason] =>
-                                [SeriesEpisode] =>
-                                [MovieKind] => movie
-                                [SubDownloadLink] => http://dl.opensubtitles.org/en/download/filead/1118.gz
-                                [ZipDownloadLink] => http://dl.opensubtitles.org/en/download/subad/905
-                                [SubtitlesLink] => http://www.opensubtitles.org/en/subtitles/905/al-sur-de-granada-es
-                            )
+            OpenSubtitles.SearchSubtitles(_options.movie, _options.language, function (subtitles) {
+                var filteredSubs = subtitles.filter(function (_subtitle) {
+                    return _subtitle.SubFormat === 'srt';
+                });
 
-                        [1] => Array
-           */
+                async.each(filteredSubs, function (file, callback) {
+                    OpenSubtitles.DownloadSubtitles(folder, file, callback);
+                }, function (err) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        var zipFile = folder + '/' + '/subtitles.zip';
+                        var output = fs.createWriteStream(zipFile);
+                        var archive = archiver('zip');
+                        archive.pipe(output);
+                        output.on('close', function () {
+                            filteredSubs.forEach(function (s) {
+                                fs.unlink(folder + '/' + s.SubFileName, (err) => {});
+                            });
+                            _callback(null, zipFile);
+                        });
+                        filteredSubs.forEach(function (s) {
+                            archive.append(fs.createReadStream(folder + '/' + s.SubFileName), {
+                                name: s.SubFileName
+                            });
+                        });
+
+                        archive.finalize();
+                    }
+                });
+            });
+        });
     };
 
     return OpenSubtitles;
