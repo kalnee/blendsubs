@@ -1,18 +1,40 @@
+script(type="text/ng-template" id="movieSearch.html")
+	div.navbar-suggestionsearch(ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block; width: 534px;" ng-show="isOpen() && !moveInProgress" aria-hidden="{{!isOpen()}}")
+		a.poster(ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}")
+			img(src="{{match.model.Poster}}" title="" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54")
+			div.suggestionlabel
+				span.title {{match.model.Title}}
+				span.extra ({{match.model.Year}})
+				div.detail {{match.Actors}}
+
 form(role="form")
 	.panel.panel-secondary.enter
 		.panel-heading
 			h3.panel-title Step 1: Search for the movie title
 		.panel-body
-			.input-group.input-group-lg
-				input(type="text" class="form-control" placeholder="Movie, TV show, etc..." typeahead="movie.title + ' - ' + movie.title_description for movie in getMovies($viewValue)" typeahead-editable="false" typeahead-on-select="onSelect($item, $model, $label)" ng-model="movie.title")
+			.input-group.input-group-lg(ng-if="!subtitle.movie")
+				input(type="text" class="form-control" placeholder="Movie, TV show, etc..." typeahead="movie.Title for movie in getMovies($viewValue)" typeahead-editable="false" typeahead-on-select="onSelect($item, $model, $label)" ng-model="movie.title" typeahead-popup-template-url="movieSearch.html")
 				span(class="input-group-btn")
 					button(class="btn btn-secondary btn-lg" type="button")
 						span.glyphicon.glyphicon-search
-
-			.form-group.hidden
-				label(for="exampleInputFile") File input
-				input(type="file" id="exampleInputFile")
-				p.help-block Example block-level help text here.
+			div.col-xs-3(ng-if="subtitle.movie")
+				img(src="{{title.Poster}}" width="150" height="204")
+			div.col-xs-9(ng-if="subtitle.movie")
+				div.col-xs-12
+					strong Title:&nbsp;
+					span {{title.Title}}
+				div.col-xs-12
+					strong Year:&nbsp;
+					span {{title.Year}}
+				div.col-xs-6(ng-if="title.Type == 'series'")
+					label Season:
+					select.form-control(ng-options="s as s.name for s in title.seasons" ng-model="subtitle.season")
+				div.col-xs-6(ng-if="title.Type == 'series'")
+					label Episode:
+					select.form-control(ng-options="e as e.name for e in subtitle.season.episodes" ng-model="subtitle.episode")
+				div.col-xs-12(style="margin-top: 10px;")
+					button(bs-button="clear()" class="btn btn-primary")
+						span Clear
 
 	.panel.panel-secondary(ng-hide="!subtitle.movie")
 		.panel-heading
@@ -30,15 +52,15 @@ form(role="form")
 						.radio
 							label
 								input(type="radio" name="mode" id="obfuscation" ng-model="subtitle.mode" value="obfuscation")
-								| Obfuscation 
+								| Obfuscation
 								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Obfuscation Mode" data-content="In this mode, the words will be obfucated (e.g It's a beautiful ___ outside!).")
 					.col-xs-6
 						.radio
-							label 
+							label
 								input(type="radio" name="mode" id="translation" ng-model="subtitle.mode" value="translation")
-								| Translation 
+								| Translation
 								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Translation Mode" data-content="In this mode, the most commom words will be translated (e.g It's a beautiful día outside!).")
-						
+
 	.panel.panel-secondary(ng-hide="!subtitle.mode")
 		.panel-heading
 				h3.panel-title Step 3: Choose the languages for the subtitles
@@ -50,7 +72,7 @@ form(role="form")
 					.col-xs-6(ng-if="subtitle.mode == 'translation'")
 						label Foreign language
 						div(bs-language-picker flags="true" blank="true" ng-model="subtitle.foreignLanguage")
-		
+
 	.panel.panel-secondary(ng-hide="true || !movie && (!subtitle.language || !subtitle.foreignLanguage)")
 		.panel-heading
 				h3.panel-title Step 3: Choose how much of the foreign language to be merged
