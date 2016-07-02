@@ -36,7 +36,7 @@ form(role="form")
 					button(bs-button="clear()" class="btn btn-primary")
 						span Clear
 
-	.panel.panel-secondary(ng-hide="!subtitle.movie")
+	.panel.panel-secondary(ng-if="subtitle.movie !== null")
 		.panel-heading
 				h3.panel-title Step 2: Choose the mode
 			.panel-body
@@ -60,22 +60,22 @@ form(role="form")
 								input(type="radio" name="mode" id="translation" ng-model="subtitle.mode" value="translation")
 								| Translation
 								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Translation Mode" data-content="In this mode, the most commom words will be translated (e.g It's a beautiful día outside!).")
-
-	.panel.panel-secondary(ng-hide="!subtitle.mode")
+												
+	.panel.panel-secondary(ng-if="subtitle.mode !== null")
 		.panel-heading
 				h3.panel-title Step 3: Choose the languages for the subtitles
 			.panel-body
 				.row
 					.col-xs-6
 						label Native language
-						div(bs-language-picker flags="true" blank="true" ng-model="subtitle.language")
+						div(bs-language-picker flags="true" includes="pt_BR" ng-model="subtitle.language")
 					.col-xs-6(ng-if="subtitle.mode == 'translation'")
 						label Foreign language
-						div(bs-language-picker flags="true" blank="true" ng-model="subtitle.foreignLanguage")
-
-	.panel.panel-secondary(ng-hide="true || !movie && (!subtitle.language || !subtitle.foreignLanguage)")
+						div(bs-language-picker flags="true" includes="en_US" ng-model="subtitle.foreignLanguage")
+		
+	.panel.panel-secondary(ng-if="subtitle.language !== null")
 		.panel-heading
-				h3.panel-title Step 3: Choose how much of the foreign language to be merged
+				h3.panel-title Step 4: Choose how much of the foreign language to be merged
 			.panel-body
 				.row
 					.col-xs-12

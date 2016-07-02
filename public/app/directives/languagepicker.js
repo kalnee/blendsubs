@@ -9,8 +9,8 @@
 			{
 				id: 'spa',
 				code: 'es',
-				country: 'MX',
-				fullCode: 'es_MX',
+				country: 'ES',
+				fullCode: 'es',
 				name: 'Spanish'
 			},
 			{
@@ -23,8 +23,8 @@
 			{
 				id: 'fre',
 				code: 'fr',
-				country: 'CA',
-				fullCode: 'fr_CA',
+				country: 'FR',
+				fullCode: 'fr',
 				name: 'French'
 			},
 			{
@@ -48,11 +48,17 @@
 			'bul': 'Bulgarian'*/
 		];
 
+		var filteredLanguageList = [];
+
 		function createTemplate(scope) {
 			var template = '';
 			template += '<a class="bfh-selectbox-toggle dropdown-toggle form-control" role="button" data-toggle="dropdown" href="#">';
 			template += '<span class="bfh-selectbox-option">';
-			template += '<i class="glyphicon bfh-flag-' + scope.language.country + '"></i>' + scope.language.name;
+			if (scope.language !== null) {
+				template += '<i class="glyphicon bfh-flag-' + scope.language.country + '"></i>' + scope.language.name;
+			} else {
+					template += 'Select a language';
+			}
 			template += '</span>';
 			template += '<span class="caret selectbox-caret"></span>';
 			template += '</a>';
@@ -61,15 +67,11 @@
 			template += '<div role="listbox">';
 			template += '<ul role="option">';
 
-			if (scope.blank === true) {
-				template += '<li><a tabindex="-1" href="#" data-option=""></a></li>';
-			}
-
-			ng.forEach(_.sortBy(languagesList, 'name'), function (language) {
+			ng.forEach(_.sortBy(filteredLanguageList, 'name'), function (language) {
 				if (scope.flags === true) {
-					template += '<li><a bs-language-option tabindex="-1" href="#" data-option="' + language.fullCode + '"><i class="glyphicon bfh-flag-' + language.country + '"></i>' + language.name + '</a></li>';
+					template += '<li><a bs-language-option href="#" data-option="' + language.fullCode + '"><i class="glyphicon bfh-flag-' + language.country + '"></i>' + language.name + '</a></li>';
 				} else {
-					template += '<li><a tabindex="-1" href="#" data-option="' + language.fullCode + '">' + language.name + ' (Country Name)</a></li>';
+					template += '<li><a href="#" data-option="' + language.fullCode + '">' + language.name + ' (Country Name)</a></li>';
 				}
 			});
 
@@ -78,34 +80,26 @@
 			return template;
 		}
 
-		function getDefaultLanguage() {
-			var language = navigator.language,
-				filteredLanguage = [];
-
-			//If nothing is returned by the browser just don't select anything
-			if (language === undefined) {
-				return undefined;
-			}
-
-			//Gets the object containing the fullCode
-			filteredLanguage = _.filter(languagesList, function (_lang) {
-				return _lang.fullCode === language;
-			});
-
-			//If at least one object is found, returns it. Otherwise, returns en_US object
-			return (filteredLanguage[0] !== undefined) ? filteredLanguage[0] : languagesList[1] //en_US;
-		}
-
 		return {
 			restrict: 'A',
 			scope: {
-				blank: "=blank",
-				flags: "=flags"
+				flags: "=",
+				includes: "@"
 			},
 
 			controller: function ($scope, $element, $attrs) {
+				$scope.init = function() {
+					var includedLanguages = $scope.includes.split(',');
+
+					filteredLanguageList = _.filter(languagesList, function(language) {
+						return _.contains(includedLanguages, language.fullCode);
+					});
+				}
+
+				$scope.init();
+
 				$scope.setSelected = function (_option) {
-					$scope.language = _.find(languagesList, function (_lang) {
+					$scope.language = _.find(filteredLanguageList, function (_lang) {
 						return _lang.fullCode === _option;
 					});
 
@@ -116,8 +110,7 @@
 			},
 
 			link: function (scope, element, attrs) {
-				scope.language = getDefaultLanguage();
-				scope.setSelected(scope.language.fullCode);
+				scope.language = null;
 				element.addClass('bfh-selectbox');
 				element.addClass('bfh-languages');
 				element.addClass('dropdown');
