@@ -52,13 +52,13 @@ form(role="form")
 						.radio
 							label
 								input(type="radio" name="mode" id="obfuscation" ng-model="subtitle.mode" value="obfuscation")
-								| Obfuscation
+								| Obfuscation&nbsp;
 								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Obfuscation Mode" data-content="In this mode, the words will be obfucated (e.g It's a beautiful ___ outside!).")
 					.col-xs-6
 						.radio
 							label
 								input(type="radio" name="mode" id="translation" ng-model="subtitle.mode" value="translation")
-								| Translation
+								| Translation&nbsp;
 								span.glyphicon.glyphicon-info-sign(type="button" data-toggle="popover" title="Translation Mode" data-content="In this mode, the most commom words will be translated (e.g It's a beautiful día outside!).")
 												
 	.panel.panel-secondary(ng-if="subtitle.mode !== null")
@@ -73,21 +73,14 @@ form(role="form")
 						label Foreign language
 						div(bs-language-picker flags="true" includes="en_US" ng-model="subtitle.foreignLanguage")
 		
-	.panel.panel-secondary(ng-if="subtitle.language !== null")
+	.panel.panel-secondary(ng-if="showPercentageBar()")
 		.panel-heading
 				h3.panel-title Step 4: Choose how much of the foreign language to be merged
 			.panel-body
 				.row
 					.col-xs-12
 						label Blending percentage (%)
-						div(range-slider min="0" max="100" model-min="min" model-max="max" pin-handle="min" show-values="true" step="10")
-	.panel.panel-secondary(ng-hide="true")
-		.panel-heading
-				h3.panel-title Step 4: Download the mixed subtitle
-			.panel-body
-				.row
-					.col-xs-12
-						a(href="#") subtitle-en.srt
+						div(range-slider min="0" max="100" model-max="subtitle.percentual" pin-handle="min" show-values="true" step="10")
 
-	button(bs-button="merge()" class="btn btn-primary btn-lg center-block")
+	button(bs-button="merge()" class="btn btn-primary btn-lg center-block" ng-if="subtitle.percentual !== 0")
 		span.ladda-label Merge

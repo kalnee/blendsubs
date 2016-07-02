@@ -14,7 +14,7 @@
 
   module.controller('MainCtrl', function ($scope, $http, $q, notifier) {
     $scope.min = 0;
-    $scope.max = 10;
+    $scope.max = 100;
 
     $scope.movie = null;
 
@@ -22,7 +22,7 @@
       movie: null,
       language: null,
       foreignLanguage: null,
-      percentual: 10,
+      percentual: 0,
       mode: null,
       season: null,
       episode: null
@@ -91,7 +91,7 @@
         movie: null,
         language: null,
         foreignLanguage: null,
-        percentual: 10,
+        percentual: 0,
         mode: null,
         season: null,
         episode: null
@@ -100,6 +100,14 @@
       $scope.movie = null;
 
     };
+
+    $scope.showPercentageBar = function() {
+      if ($scope.subtitle.mode === 'translation') {
+        return $scope.subtitle.language !== null && $scope.subtitle.foreignLanguage !== null;
+      }
+
+      return $scope.subtitle.language !== null;
+    }
   });
 
 })(angular);
