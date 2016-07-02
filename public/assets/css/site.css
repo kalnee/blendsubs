@@ -92,3 +92,63 @@ footer {
 footer p {
   border-top: 1px solid #d7e0e2;
 }
+
+.navbar-suggestionsearch {
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0,0,0,0.8) 0 4px 14px 0;
+    overflow: hidden;
+    padding: 0px;
+    z-index: 99999;
+    border-radius: 0 0 12px 12px;
+    font-size: 13px;
+}
+
+.navbar-suggestionsearch a {
+    display: block;
+    clear: both;
+    border-bottom: 1px solid #efefef;
+    color: #136CB2;
+    max-height: 100px;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar-suggestionsearch a.active {
+  background-color: #428bca;
+  color: #fff;
+}
+
+.navbar-suggestionsearch a.poster>img {
+    float: left;
+    margin: 4px;
+}
+
+img {
+    border: none;
+}
+
+.navbar-suggestionsearch a:visited {
+    color: #70579D;
+}
+
+.navbar-suggestionsearch .suggestionlabel {
+    padding: 6px 4px 5px 50px;
+}
+
+.navbar-suggestionsearch a .title {
+    font-weight: bold;
+    line-height: 110%;
+}
+
+.navbar-suggestionsearch a .extra {
+    font-weight: normal;
+}
+
+.navbar-suggestionsearch a .detail {
+    color: #666666;
+    text-decoration: none;
+    font-size: 11px;
+    margin-top: 2px;
+}

@@ -23,7 +23,9 @@
       language: null,
       foreignLanguage: null,
       percentual: 10,
-      mode: null
+      mode: null,
+      season: null,
+      episode: null
     };
 
     $scope.getMovies = function (_query) {
@@ -32,17 +34,26 @@
           movie: _query,
         }
       }).then(function (response) {
-        if (response.data.title_popular) {
-          return response.data.title_popular.map(function (item) {
-            return item;
+        if (response.data.Search) {
+          return response.data.Search.filter(function (item) {
+            return item.Type === 'movie' || item.Type === 'series';
           });
         }
       });
     };
 
     $scope.onSelect = function ($item, $model, $label) {
-      $scope.subtitle.movie = $item.id.replace('tt', '');
-      $model = $item.title;
+      $scope.subtitle.movie = $item.imdbID.replace('tt', '');
+      $model = $item.Title;
+      $http.get('api/subtitle/details', {
+        params: {
+          id: $item.imdbID,
+          name: $item.Title,
+          type: $item.Type
+        }
+      }).then(function (response) {
+        $scope.title = response.data;
+      });
     };
 
     function executeMerge() {
@@ -73,6 +84,21 @@
       });
 
       return t;
+    };
+
+    $scope.clear = function () {
+      $scope.subtitle = {
+        movie: null,
+        language: null,
+        foreignLanguage: null,
+        percentual: 10,
+        mode: null,
+        season: null,
+        episode: null
+      };
+
+      $scope.movie = null;
+
     };
   });
 

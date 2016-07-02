@@ -9,12 +9,6 @@ module.exports = function (app) {
 		});
 	});
 
-	app.get('/api/subtitle/download', function (req, res) {
-		api.DownloadSubtitles('http://dl.opensubtitles.org/en/download/filead/src-api/vrf-135aad67e0/1952060809.gz', function () {
-			res.send('Downloaded.');
-		});
-	});
-
 	app.get('/api/subtitle/search', function (req, res) {
 		api.SearchMoviesOnIMDB(req.query.movie, function (_movies) {
 			res.send(_movies);
@@ -27,6 +21,12 @@ module.exports = function (app) {
 				var fs = require('fs');
 				fs.unlink(zipFile);
 			});
+		});
+	});
+
+	app.get('/api/subtitle/details', function (req, res) {
+		api.GetDetails(req.query.id, req.query.type, req.query.name, function (err, _title) {
+			res.send(_title);
 		});
 	});
 }
