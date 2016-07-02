@@ -99,6 +99,7 @@
 				$scope.init();
 
 				$scope.setSelected = function (_option) {
+					$scope.init();
 					$scope.language = _.find(filteredLanguageList, function (_lang) {
 						return _lang.fullCode === _option;
 					});

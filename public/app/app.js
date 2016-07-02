@@ -22,7 +22,7 @@
       movie: null,
       language: null,
       foreignLanguage: null,
-      percentual: 0,
+      percentage: 0,
       mode: null,
       season: null,
       episode: null
@@ -79,7 +79,7 @@
         });
         hiddenElement.href = URL.createObjectURL(blob);
         hiddenElement.target = '_blank';
-        hiddenElement.download = 'subtitle.zip';
+        hiddenElement.download = 'subtitles.zip';
         hiddenElement.click();
       });
 
@@ -91,7 +91,7 @@
         movie: null,
         language: null,
         foreignLanguage: null,
-        percentual: 0,
+        percentage: 0,
         mode: null,
         season: null,
         episode: null
