@@ -82,5 +82,5 @@ form(role="form")
 						label Blending percentage (%)
 						div(range-slider min="0" max="100" model-max="subtitle.percentage" pin-handle="min" show-values="true" step="10")
 
-	button(bs-button="merge()" class="btn btn-primary btn-lg center-block" ng-if="subtitle.percentage !== 0")
-		span.ladda-label Merge
+	button(bs-button="download()" class="btn btn-primary btn-lg center-block" ng-if="subtitle.percentage !== 0")
+		span.ladda-label Download

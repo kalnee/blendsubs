@@ -56,9 +56,9 @@
       });
     };
 
-    function executeMerge() {
+    function executeDownload() {
       var deferred = $q.defer();
-      $http.post('api/subtitle/merge', $scope.subtitle, {
+      $http.post('api/subtitle/download', $scope.subtitle, {
           responseType: 'arraybuffer'
         })
         .success(function (data) {
@@ -67,11 +67,11 @@
       return deferred.promise;
     }
 
-    $scope.merge = function ($evt) {
-      var t = executeMerge();
+    $scope.download = function ($evt) {
+      var t = executeDownload();
 
       t.then(function (results) {
-        notifier.notify('Subtitle successfully merged!');
+        notifier.notify('Subtitles successfully generated!');
 
         var hiddenElement = document.createElement('a');
         var blob = new Blob([results], {

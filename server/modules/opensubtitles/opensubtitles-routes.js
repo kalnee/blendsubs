@@ -15,7 +15,7 @@ module.exports = function (app) {
 		});
 	});
 
-	app.post('/api/subtitle/merge', function (req, res) {
+	app.post('/api/subtitle/download', function (req, res) {
 		api.DownloadAll(req.body, function (err, zipFile) {
 			res.download(zipFile, function (err) {
 				var fs = require('fs');
