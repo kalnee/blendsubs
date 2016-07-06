@@ -54,7 +54,7 @@
       }).then(function (response) {
         $scope.title = response.data;
 	// Set default options for season and episode
-	if ($scope.title.seasons && $scope.title.seasons.length > 0) {
+	if (!_.isEmpty($scope.title.seasons)) {
 		$scope.subtitle.season = $scope.title.seasons[0];
 		$scope.subtitle.episode = $scope.subtitle.season.episodes[0];
 	}
