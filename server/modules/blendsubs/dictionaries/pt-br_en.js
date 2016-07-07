@@ -23,31 +23,57 @@ module.exports = {
   'bonita': 'beautiful',
   'bola': 'ball',
   'bicicleta': 'bicicly',
+  'bolo': 'cake',
+  'barato': 'cheap',
+  'banana': 'banana',
+  'bêbado': 'drunk',
 
+  'calculadora': 'calculator',
   'caminho': 'way',
   'corpo': 'body',
   'cidade': 'city',
   'cerveja': 'beer',
   'cinto': 'belt',
+  'cartão': 'card',
+  'cuidadosamente': 'carefully',
+  'chocolate': 'chocolate',
+  'cachorro': 'dog',
 
   'distante': 'far',
+  'dezembro': 'december',
+  'definitivamente': 'definitely',
+  'delicioso': 'delicious',
+  'dentista': 'dentist',
+  'dicionário': 'dictionary',
+  'dólar': 'dollar',
 
   'endereço': 'address',
+  'esforço': 'effort',
+  'eletricidade': 'electricity',
+  'extremamente': 'extremely',
 
+  'fácil': 'easy',
   'feijão': 'bean',
+  'frango': 'chicken',
+  'filha': 'daughter',
+  'filho': 'son',
+  'funcionário': 'employee',
 
   'garrafa': 'bottle',
+  'gato': 'cat',
 
   'hoje': 'today',
 
   'iniciante': 'beginner',
   'irmão': 'brother',
   'sister': 'irmã',
+  'igreja': 'church',
 
   'jeito': 'way',
 
   'longe': 'far',
   'livro': 'book',
+  'leste': 'east',
 
   'maçã': 'apple',
   'mãe': 'mother',
@@ -57,11 +83,15 @@ module.exports = {
   'menino': 'boy',
   'menina': 'girl',
   'manteiga': 'butter',
+  'milho': 'corn',
+  'médico': 'doctor',
 
   'nunca': 'never',
+  'nublado': 'cloudy',
 
   'obrigado': 'thank you',
   'ônibus': 'bus',
+  'olho': 'eye',
 
   'pai': 'father',
   'perguntar': 'ask',
@@ -76,13 +106,23 @@ module.exports = {
   'passarinho': 'bird',
   'preto': 'black',
   'prédio': 'building',
+  'personagens': 'characters',
+  'personagem': 'character',
+  'pente': 'comb',
+  'país': 'country',
+  'primo': 'cousin',
+  'prima': 'cousin',
+  'porta': 'door',
+  'pato': 'duck',
 
   'quando': 'when',
+  'queijo': 'cheese'
 
   'raiva': 'angry',
   'resposta': 'answer',
 
   'sozinho': 'alone',
+  'sofá': 'couch',
 
   'tia': 'aunt',
   'tio': 'uncle'
