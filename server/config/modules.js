@@ -1,4 +1,4 @@
 module.exports = function (app) {
 
-	require('../modules/opensubtitles/opensubtitles-config')(app);
+	require('../modules/subtitle/subtitle-config')(app);
 }

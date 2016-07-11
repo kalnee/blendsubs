@@ -17,7 +17,8 @@ define(function () {
                 'User-Agent': appUserAgent
             }
         }),
-        token;
+        token,
+        blender = require('../blendsubs/blendsubs');
 
     function OpenSubtitles() {
 
@@ -62,13 +63,15 @@ define(function () {
                     headers: {
                         'Accept-Encoding': 'gzip'
                     }
-                }).on('response', function (response) {
-                    if (_callback) {
-                        _callback();
-                    }
                 })
                 .pipe(zlib.createGunzip())
                 .pipe(output);
+
+            output.on('close', function () {
+                if (_callback) {
+                    _callback();
+                }
+            });
         }
 
         unzip(_subtitle.SubDownloadLink, _folder + '/' + _subtitle.SubFileName);
@@ -115,7 +118,9 @@ define(function () {
                 });
 
                 async.each(filteredSubs, function (file, callback) {
-                    OpenSubtitles.DownloadSubtitles(folder, file, callback);
+                    OpenSubtitles.DownloadSubtitles(folder, file, function () {
+                        blender(folder + '/' + file.SubFileName, _options.mode, _options.percentage, callback);
+                    });
                 }, function (err) {
                     if (err)
                         throw err;
