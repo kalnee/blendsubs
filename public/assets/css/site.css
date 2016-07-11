@@ -12,6 +12,9 @@ body {
 .sm-padding-top {
   padding-top: 15px !important;
 }
+.sm-margin-left {
+  margin-left: 15px !important;
+}
 
 /* Adding a second color related to the visual identity*/
 
