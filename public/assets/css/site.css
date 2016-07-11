@@ -1,15 +1,20 @@
 body {
-        padding-top: 80px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  padding-top: 80px;
+  /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 #logo-center {
-	width: 42%;
-	margin-bottom: 5px;
+  width: 42%;
+  margin-bottom: 5px;
 }
 .enter {
   margin-top: 20px !important;
 }
+.sm-padding-top {
+  padding-top: 15px !important;
+}
+
 /* Adding a second color related to the visual identity*/
+
 .panel-secondary {
   border-color: #46857D;
 }
@@ -33,39 +38,15 @@ body {
   background-color: #46857D;
   border-color: #417D76;
 }
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary.focus,
-.btn-secondary:active,
-.btn-secondary.active,
-.open > .dropdown-toggle.btn-secondary {
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary.focus, .btn-secondary:active, .btn-secondary.active, .open > .dropdown-toggle.btn-secondary {
   color: #fff;
   background-color: #417D76;
   border-color: #46857D;
 }
-.btn-secondary:active,
-.btn-secondary.active,
-.open > .dropdown-toggle.btn-secondary {
+.btn-secondary:active, .btn-secondary.active, .open > .dropdown-toggle.btn-secondary {
   background-image: none;
 }
-.btn-secondary.disabled,
-.btn-secondary[disabled],
-fieldset[disabled] .btn-secondary,
-.btn-secondary.disabled:hover,
-.btn-secondary[disabled]:hover,
-fieldset[disabled] .btn-secondary:hover,
-.btn-secondary.disabled:focus,
-.btn-secondary[disabled]:focus,
-fieldset[disabled] .btn-secondary:focus,
-.btn-secondary.disabled.focus,
-.btn-secondary[disabled].focus,
-fieldset[disabled] .btn-secondary.focus,
-.btn-secondary.disabled:active,
-.btn-secondary[disabled]:active,
-fieldset[disabled] .btn-secondary:active,
-.btn-secondary.disabled.active,
-.btn-secondary[disabled].active,
-fieldset[disabled] .btn-secondary.active {
+.btn-secondary.disabled, .btn-secondary[disabled], fieldset[disabled] .btn-secondary, .btn-secondary.disabled:hover, .btn-secondary[disabled]:hover, fieldset[disabled] .btn-secondary:hover, .btn-secondary.disabled:focus, .btn-secondary[disabled]:focus, fieldset[disabled] .btn-secondary:focus, .btn-secondary.disabled.focus, .btn-secondary[disabled].focus, fieldset[disabled] .btn-secondary.focus, .btn-secondary.disabled:active, .btn-secondary[disabled]:active, fieldset[disabled] .btn-secondary:active, .btn-secondary.disabled.active, .btn-secondary[disabled].active, fieldset[disabled] .btn-secondary.active {
   background-color: #46857D;
   border-color: #437E77;
 }
@@ -75,6 +56,7 @@ fieldset[disabled] .btn-secondary.active {
 }
 
 /* Changing the angular-slider color*/
+
 .ngrs-range-slider .ngrs-join {
   background-color: #25514C !important;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #52C4B6), color-stop(100%, #25514C)) !important;
@@ -83,7 +65,6 @@ fieldset[disabled] .btn-secondary.active {
   background-image: -o-linear-gradient(#52C4B6, #25514C) !important;
   background-image: linear-gradient(#52C4B6, #25514C) !important;
 }
-
 footer {
   padding-left: 15px;
   padding-right: 15px;
@@ -92,63 +73,61 @@ footer {
 footer p {
   border-top: 1px solid #d7e0e2;
 }
-
 .navbar-suggestionsearch {
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: rgba(0,0,0,0.8) 0 4px 14px 0;
-    overflow: hidden;
-    padding: 0px;
-    z-index: 99999;
-    border-radius: 0 0 12px 12px;
-    font-size: 13px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 4px 14px 0;
+  overflow: hidden;
+  padding: 0px;
+  z-index: 99999;
+  border-radius: 0 0 12px 12px;
+  font-size: 13px;
 }
-
 .navbar-suggestionsearch a {
-    display: block;
-    clear: both;
-    border-bottom: 1px solid #efefef;
-    color: #136CB2;
-    max-height: 100px;
-    overflow: hidden;
-    text-decoration: none;
-    cursor: pointer;
+  display: block;
+  clear: both;
+  border-bottom: 1px solid #efefef;
+  color: #136CB2;
+  max-height: 100px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
 }
-
 .navbar-suggestionsearch a.active {
   background-color: #428bca;
   color: #fff;
 }
-
 .navbar-suggestionsearch a.poster>img {
-    float: left;
-    margin: 4px;
+  float: left;
+  margin: 4px;
 }
-
 img {
-    border: none;
+  border: none;
 }
-
 .navbar-suggestionsearch a:visited {
-    color: #70579D;
+  color: #70579D;
 }
-
 .navbar-suggestionsearch .suggestionlabel {
-    padding: 6px 4px 5px 50px;
+  padding: 6px 4px 5px 50px;
 }
-
 .navbar-suggestionsearch a .title {
-    font-weight: bold;
-    line-height: 110%;
+  font-weight: bold;
+  line-height: 110%;
 }
-
 .navbar-suggestionsearch a .extra {
-    font-weight: normal;
+  font-weight: normal;
+}
+.navbar-suggestionsearch a .detail {
+  color: #666666;
+  text-decoration: none;
+  font-size: 11px;
+  margin-top: 2px;
 }
 
-.navbar-suggestionsearch a .detail {
-    color: #666666;
-    text-decoration: none;
-    font-size: 11px;
-    margin-top: 2px;
+#github-fork-me {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  z-index: 99999
 }
