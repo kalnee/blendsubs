@@ -116,7 +116,7 @@ module.exports = {
   'pato': 'duck',
 
   'quando': 'when',
-  'queijo': 'cheese'
+  'queijo': 'cheese',
 
   'raiva': 'angry',
   'resposta': 'answer',
