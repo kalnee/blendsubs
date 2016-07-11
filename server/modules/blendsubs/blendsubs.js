@@ -4,9 +4,9 @@ var fs = require('fs'),
   wordObfuscation = require('./modes/word-obfuscation'),
   wordTranslation = require('./modes/word-translation');
 
-module.exports = function(file, mode, percentage) {
+module.exports = function (file, mode, percentage, callback) {
   winston.info('Reading subtitle file: ' + file);
-  fs.readFile(file, 'binary', function(err, bytes) {
+  fs.readFile(file, 'binary', function (err, bytes) {
     if (err) throw err;
     winston.info('Subtitle file read');
     var text = iconv.decode(bytes, "ISO-8859-1");
@@ -26,7 +26,7 @@ module.exports = function(file, mode, percentage) {
           continue;
         }
 
-        if (Math.random() < mode) {
+        if (Math.random() < percentage) {
           var wordBefore = words[j];
 
           if (mode === 'translation') {
@@ -46,10 +46,15 @@ module.exports = function(file, mode, percentage) {
       lines[i] = words.join(' ');
     }
 
+    fs.writeFile(file, lines.join('\n'), 'utf8', function (err) {
+      if (err) throw err;
+      callback();
+    });
+
     winston.info('\n======= CHANGED =========');
     winston.info('mode: ' + mode);
     winston.info('Changed words: (' + changedWords.length + ')');
-    changedWords.forEach(function(w, i) {
+    changedWords.forEach(function (w, i) {
       winston.info(i + ' - ' + w);
     });
   });
