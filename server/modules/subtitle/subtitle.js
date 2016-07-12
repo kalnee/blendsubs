@@ -19,8 +19,8 @@ define(function () {
         provider.DownloadAll(_options, _callback);
     };
 
-    Subtitle.getDetails = function ($imdbId, $type, $name, _callback) {
-        provider.GetDetails($imdbId, $type, $name, _callback);
+    Subtitle.getDetails = function ($imdbId, $type, $name, $year, _callback) {
+        provider.GetDetails($imdbId, $type, $name, $year, _callback);
     };
 
     return Subtitle;

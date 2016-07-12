@@ -147,8 +147,8 @@ define(function () {
         });
     };
 
-    OpenSubtitles.ListShowEpisodes = function ($name, callback) {
-        request('http://imdbapi.poromenos.org/js/?name=' + encodeURI($name), function (error, response, body) {
+    OpenSubtitles.ListShowEpisodes = function ($name, $year, callback) {
+        request('http://imdbapi.poromenos.org/js/?name=' + encodeURI($name) + '&year=' + $year, function (error, response, body) {
             if (error)
                 throw error;
 
@@ -189,7 +189,7 @@ define(function () {
         });
     };
 
-    OpenSubtitles.GetDetails = function ($imdbId, $type, $name, _callback) {
+    OpenSubtitles.GetDetails = function ($imdbId, $type, $name, $year, _callback) {
         const async = require('async');
 
         async.parallel([(callback) => {
@@ -198,7 +198,7 @@ define(function () {
             });
         }, (callback) => {
             if ($type === 'series') {
-                OpenSubtitles.ListShowEpisodes($name, function (_seasons) {
+                OpenSubtitles.ListShowEpisodes($name, $year, function (_seasons) {
                     callback(null, _seasons);
                 });
             } else {
