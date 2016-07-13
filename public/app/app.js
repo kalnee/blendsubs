@@ -49,7 +49,8 @@
         params: {
           id: $item.imdbID,
           name: $item.Title,
-          type: $item.Type
+          type: $item.Type,
+          year: $item.Year.substring(0, 4)  
         }
       }).then(function (response) {
         $scope.title = response.data;
@@ -103,6 +104,7 @@
       };
 
       $scope.movie = null;
+      $scope.title = null;
 
     };
 

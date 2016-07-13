@@ -18,7 +18,7 @@ module.exports = function (app) {
 	});
 
 	app.get('/api/subtitle/details', function (req, res) {
-		api.getDetails(req.query.id, req.query.type, req.query.name, function (err, _title) {
+		api.getDetails(req.query.id, req.query.type, req.query.name, req.query.year, function (err, _title) {
 			res.send(_title);
 		});
 	});
