@@ -5,10 +5,11 @@ var fs = require('fs'),
   wordTranslation = require('./modes/word-translation');
 
 module.exports = function (file, mode, percentage, callback) {
-  winston.info('Reading subtitle file: ' + file);
+  winston.info('############# STARTING BLENDSUBS ##############');
+  percentage = (percentage > 1) ? percentage / 100 : percentage;
   fs.readFile(file, 'binary', function (err, bytes) {
     if (err) throw err;
-    winston.info('Subtitle file read');
+    winston.info('Subtitle file read from ' + file);
     var text = iconv.decode(bytes, "ISO-8859-1");
 
     var lines = text.split('\n'),
@@ -51,11 +52,13 @@ module.exports = function (file, mode, percentage, callback) {
       callback();
     });
 
-    winston.info('\n======= CHANGED =========');
+    winston.info('========= RESULT =========');
     winston.info('mode: ' + mode);
+    winston.info('percentage: ' + percentage);
     winston.info('Changed words: (' + changedWords.length + ')');
     changedWords.forEach(function (w, i) {
       winston.info(i + ' - ' + w);
     });
+    winston.info('############# LEAVING BLENDSUBS ##############');
   });
 }
